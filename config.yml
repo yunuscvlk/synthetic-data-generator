@@ -1,0 +1,22 @@
+core:
+  data:
+    row:
+      count: 200
+    col:
+      ignore_list:
+        - ["X4"]
+        - ["X5"]
+      update_list:
+        - ["X3", "Bachelor's Degree"]
+      add_list:
+        - [
+            "Timestamp",
+            "{FUNCTION_NAME} = lambda: Faker().date_time_this_year().strftime('%Y/%m/%d %I:%M:%S %p GMT+3')",
+          ]
+
+datasets:
+  filepath: "./datasets"
+  example:
+    filename: "example_data.csv"
+  synthetic:
+    filename: "synthetic_data.csv"
