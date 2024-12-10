@@ -1,0 +1,10 @@
+datasets:
+  example:
+    filename: "example_data.csv"
+
+  synthetic:
+    filename: "synthetic_data.csv"
+
+generate:
+  ignore_list: ["Timestamp", "Zaman damgası"]
+  number_of_data: 218

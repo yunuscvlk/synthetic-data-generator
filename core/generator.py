@@ -1,4 +1,4 @@
-import faker # type: ignore
+from faker import Faker  # type: ignore
 from .helper import *
 
 def create_content(df, ignore_list):
@@ -14,6 +14,9 @@ def create_content(df, ignore_list):
         for a, w in results.items():
             answers.append(a)
             weights.append(w)
+
+        if "time" in q.lower() or "zaman" in q.lower():
+            continue
         
         content[f"Q{idx}"] = {
             "description": q,
@@ -29,8 +32,8 @@ def generate(df, ignore_list):
     for i in ignore_list:
         if "time" in i.lower() or "zaman" in i.lower():
             content["Q#"] = {
-                "description": i,
-                "time": lambda: faker.Faker().date_time_this_year().strftime("%Y/%m/%d %I:%M:%S %p GMT+3")
+                "description": i.encode("cp1252").decode("utf8"),
+                "time": lambda: Faker().date_time_this_year().strftime("%Y/%m/%d %I:%M:%S %p GMT+3")
             }
 
     content.update(create_content(df, ignore_list))
