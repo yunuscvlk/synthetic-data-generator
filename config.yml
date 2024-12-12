@@ -1,10 +1,19 @@
+core:
+  data:
+    row:
+      count: 500
+    col:
+      ignore_list:
+        time:
+          name: ["Zaman damgası", "Timestamp"]
+          value: "{FUNCTION_NAME} = lambda: Faker().date_time_this_year().strftime('%Y/%m/%d %I:%M:%S %p GMT+3')"
+        test:
+          name: "Test"
+          value: "test value"
+
 datasets:
+  filepath: "./datasets"
   example:
     filename: "example_data.csv"
-
   synthetic:
     filename: "synthetic_data.csv"
-
-generate:
-  ignore_list: ["Timestamp", "Zaman damgası"]
-  number_of_data: 218

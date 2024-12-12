@@ -1,4 +1,13 @@
+import ast
+import types
 import random
+
+def is_valid_python_code(code):
+    try:
+        ast.parse(code)
+        return True
+    except SyntaxError:
+        return False
 
 def calculate_weights(df, column_name):
     value_counts = df[column_name].value_counts(normalize=True)
@@ -20,9 +29,10 @@ def weighted_choice(choices, weights):
 def generate_row_with_weights(content):
     rows = {}
 
-    for _, v in content.items():
-        if "time" in v:
-            rows[v["description"]] = v["time"]()
+    for v in content.values():
+        if "udf_description" in v:
+            value = list(v.values())[1]
+            rows[v["udf_description"]] = value() if isinstance(value, types.FunctionType) else value
         else:
             rows[v["description"]] = weighted_choice(v["answers"], v["weights"])
 
